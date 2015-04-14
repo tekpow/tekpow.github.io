@@ -1,9 +1,22 @@
 Summoners spells :
 
+<<<<<<< HEAD
+https://global.api.pvp.net/api/lol/static-data/{region}/v1.2/summoner-spell?api_key={api_key}
+=======
 https://global.api.pvp.net/api/lol/static-data/euw/v1.2/summoner-spell?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41
+>>>>>>> 87f951e7658fd79da96d74c83f49f9c69eb25072
 
 
 Champions :
 
+<<<<<<< HEAD
+https://global.api.pvp.net/api/lol/static-data/{region}/v1.2/champion?locale=en_US&api_key={api_key}
+
+
+Summoners :
+
+https://euw.api.pvp.net/api/lol/{region}/v1.4/summoner/by-name/{summoner}?api_key={api_key}
+=======
 https://global.api.pvp.net/api/lol/static-data/euw/v1.2/champion?locale=en_US&api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41
 
+>>>>>>> 87f951e7658fd79da96d74c83f49f9c69eb25072
