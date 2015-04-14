@@ -1,0 +1,9 @@
+Summoners spells :
+
+https://global.api.pvp.net/api/lol/static-data/euw/v1.2/summoner-spell?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41
+
+
+Champions :
+
+https://global.api.pvp.net/api/lol/static-data/euw/v1.2/champion?locale=en_US&api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41
+
