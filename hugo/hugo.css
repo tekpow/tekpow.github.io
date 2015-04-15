@@ -5,3 +5,24 @@
   font-size: 18px;
   line-height: 20px;
 }
+
+/*.navbar-inverse {
+  background-color: #1242C7;
+  border-color: #5877CC;
+}*/
+
+@font-face {
+    font-family: 'Exo';
+    src: url('file:///home/villev_h/HTML/website/res/fonts/exo/Exo-Regular.otf');
+}
+
+.form1 {
+    position: absolute;
+    right: 100px;
+}
+
+.all {
+  font-family: 'Exo';
+  margin-left: auto;
+  margin-right: auto;
+}
