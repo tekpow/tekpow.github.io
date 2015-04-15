@@ -6,10 +6,31 @@
   line-height: 20px;
 }
 
+.navbar {
+    margin-bottom: 0px;
+}
+
 /*.navbar-inverse {
   background-color: #1242C7;
   border-color: #5877CC;
 }*/
+
+.btn-default {
+    color: #FFFFFF;
+    background-color: #230CF3;
+    border-color: #0C4DF3;
+}
+
+.logo {
+    position: absolute;
+    up: 5px;
+    left: 5px;
+}
+
+.jumbotron {
+    height: 500px;
+    background-color: #EEE;
+}
 
 @font-face {
     font-family: 'Exo';
