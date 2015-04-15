@@ -9,9 +9,16 @@
 <html lang="en">
   <title>LolPow</title>
   <head>
+
+    <!-- Cascading Stylesheets -->
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="hugo.css" rel="stylesheet" type="text/css">
     <link href="../res/ico/Tray_32.png" rel="shortcut icon">
+
+    <!-- Scripts -->
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../bootstrap/js/npm.js"></script>
   </head>
 
   <div class="all">
@@ -22,11 +29,21 @@
 	<div class="navbar-header">
 
 	  <!-- Logo -->
-	  <a class="logo" href="#" title="League Stats"><img src="../res/ico/logo.png"></a>
+	  <a class="logo" href="#" title="League Stats"><img src="../res/ico/logo2.png"></a>
 
 	  <!-- Form Summoner -->
 	  <div class="form1">
 	    <form class="navbar-form navbar-left" method="post" action="form.php">
+
+	      <!-- DropDown -->
+	      <span class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Messages <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">EUW</a></li>
+                  <li><a href="#">NA</a></li>
+                </ul>
+              </span>
+	      
               <div class="form-group">
 		<input type="text" class="form-control" name="player" placeholder="Search Summoner">
               </div>
