@@ -28,8 +28,17 @@
 }
 
 .jumbotron {
-    height: 500px;
+    height: 798px;
+    margin-bottom: 0px;
     background-color: #EEE;
+    background: url('file:///home/villev_h/HTML/website/res/jumbo/jumbo.jpg');
+    color: #EEE;
+}
+
+.footer {
+    height: 200px;
+    background-color: #222;
+    border-color: #FFFFFF;
 }
 
 @font-face {
