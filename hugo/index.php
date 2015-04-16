@@ -33,18 +33,20 @@
 
 	  <!-- Logo -->
 	  <a class="logo" href="#" title="League Stats"><img src="../res/ico/logo2.png"></a>
-	  
+
 	  <!-- Form Summoner -->
 	  <div class="form1">
 	    <form class="navbar-form navbar-left" method="post" action="form.php">
+	      <!--<button title="Choose EUW" class="btn btn-default" type="submit">EUW</button>
+	    <button title="Choose NA" class="btn btn-default" type="submit">NA</button>-->
+
+	      <div class="btn-group" role="group" aria-label="...">
+		<button type="button" class="btn btn-default">EUW</button>
+		<button type="button" class="btn btn-default">NA</button>
+	      </div>
+
               <div class="form-group">
-	      	  <!-- Region Selector -->
-		  <span class="region">
-		    <form 
-		       <button title="Choose EUW" class="btn btn-default" type="submit">EUW</button>
-		       <button title="Choose NA" class="btn btn-default" type="submit">NA</button>
-		  </span>
-		  <input type="text" class="form-control" name="player" placeholder="Search Summoner">
+		<input type="text" class="form-control" name="player" placeholder="Search Summoner">
               </div>
               <button title="Get Stats" type="submit" class="btn btn-default">Go!</button>
 	    </form>
