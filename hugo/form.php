@@ -12,18 +12,9 @@
   </head>
 
   <body>
-    <form method="post">
-      <input type="text" name="player" placeholder="Search Summoner">
-      <button title="Get Stats" type="submit">Go!</button>
-    </form>
     <?php
-       $bdd = new PDO(
-       "mysql:host=sql2.olympe.in;dbname=SummonersName",
-       "ubg3rl2q",
-       "php");
        $player = $_POST['player'];
-       bdd->exec('INSERT INTO SummonerName(Pseudo) VALUES ($player)');
- 
+       echo $player; 
    ?>
   </body>
 </html>
