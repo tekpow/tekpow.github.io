@@ -13,6 +13,9 @@
     <!-- Cascading Stylesheets -->
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="hugo.css" rel="stylesheet" type="text/css">
+    <link href="dropdown.css" rel="stylesheet" type="text/css">
+
+    <!-- Site Icon -->
     <link href="../res/ico/Tray_32.png" rel="shortcut icon">
 
     <!-- Scripts -->
@@ -31,23 +34,19 @@
 	  <!-- Logo -->
 	  <a class="logo" href="#" title="League Stats"><img src="../res/ico/logo2.png"></a>
 
+	  <!-- Region Selector -->
+	  <span class="region">
+	    <button title="Choose EUW" class="btn btn-default" type="submit">EUW</button>
+	    <button title="Choose NA" class="btn btn-default" type="submit">NA</button>
+	  </span>
+	  
 	  <!-- Form Summoner -->
 	  <div class="form1">
 	    <form class="navbar-form navbar-left" method="post" action="form.php">
-
-	      <!-- DropDown -->
-	      <span class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Messages <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">EUW</a></li>
-                  <li><a href="#">NA</a></li>
-                </ul>
-              </span>
-	      
               <div class="form-group">
 		<input type="text" class="form-control" name="player" placeholder="Search Summoner">
               </div>
-              <button type="submit" class="btn btn-default">Go!</button>
+              <button title="Get Stats!" type="submit" class="btn btn-default">Go!</button>
 	    </form>
 	  </div>
 
