@@ -4,7 +4,7 @@
       / /_/ / | | |/ _` |/ _ \   /    \ / _` | '__/ __/ _ \/ _` | | | |                               
      / __  /| |_| | (_| | (_) | / /\/\ \ (_| | | | (_|  __/ (_| | |_| |                               
      \/ /_/  \__,_|\__, |\___/  \/    \/\__,_|_|  \___\___|\__,_|\__,_|                               
-              |___/                                                      -->
+                   |___/                                                 -->
 
 <html lang="en">
   <title>LolPow</title>
@@ -16,7 +16,7 @@
     <link href="dropdown.css" rel="stylesheet" type="text/css">
 
     <!-- Site Icon -->
-    <link href="../res/ico/Tray_32.png" rel="shortcut icon">
+    <link href="/res/ico/Tray_32.png" rel="shortcut icon">
 
     <!-- Scripts -->
     <script src="../bootstrap/js/bootstrap.js"></script>
