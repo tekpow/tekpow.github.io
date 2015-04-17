@@ -23,7 +23,7 @@
        $v2_2 = 'https://' . $region . '.api.pvp.net/api/lol/' . $region . '/v2.2/';
        $v2_4 = 'https://' . $region . '.api.pvp.net/api/lol/' . $region . '/v2.4/';
        $v2_5 = 'https://' . $region . '.api.pvp.net/api/lol/' . $region . '/v2.5/';
-
+   
        function askApi($url)
        {
        $ch = curl_init($url);
@@ -36,11 +36,12 @@
        function getSummonerId($v1_4, $player, $api_key)
        {
        $url = $v1_4 . 'summoner/by-name/' . $player . '?api_key=' . $api_key;
-       return askApi($url);
+       echo $url;
+       $data = askApi($url);
+       echo $data;
        }
 
-       echo getSummonerId($v1_4, $player, $api_key);
-
+       getSummonerId($v1_4, $player, $api_key);
     ?>
   </body>
 </html>
