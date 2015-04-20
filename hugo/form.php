@@ -14,9 +14,10 @@
 
 	<body>
 		<?php
-			$player = $_POST['player'];
 			$region = 'euw';
-			$api_key = 'c54b731a-fac6-4355-b11b-2c5ee40bea41';
+			$player = $_POST['player'];
+			$summId = 28954491;
+			$api_key = '?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41';
 
 			$v1_2 = 'https://' . $region . '.api.pvp.net/api/lol/' . $region . '/v1.2/';
 			$v1_3 = 'https://' . $region . '.api.pvp.net/api/lol/' . $region . '/v1.3/';
@@ -28,20 +29,27 @@
 			function askApi($url)
 			{
 				$ch = curl_init($url);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CurlOPT_RETURNTRANSFER, 1);
 				$infos = curl_exec($ch);
 				curl_close($ch);
 				return $infos;
 			}
-
+			
 			function getSummonerId($v1_4, $player, $api_key)
 			{
-				$url = $v1_4 . 'summoner/by-name/' . $player . '?api_key=' . $api_key;
+				$url = $v1_4 . 'summoner/by-name/' . $player . $api_key;
 				echo $url;
 				$data = askApi($url);
 				echo $data;
 			}
 
+			function getMatchHistory($v2_2, $summId, $api_key)
+			{
+				$url = $v2_2 . 'matchhistory/' . $summId . $api_key;
+				echo $url;
+				$data = askApi($url);
+				echo $data;
+			}
 			getSummonerId($v1_4, $player, $api_key);
 		?>
 	</body>

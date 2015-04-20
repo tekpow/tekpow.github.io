@@ -11,17 +11,17 @@
   <head>
 
     <!-- Cascading Stylesheets -->
-    <link href="bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="hugo.css" rel="stylesheet" type="text/css">
-    <link href="dropdown.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/hugo.css" rel="stylesheet" type="text/css">
+    <link href="css/dropdown.css" rel="stylesheet" type="text/css">
+    <link href="css/navbar.css" rel="stylesheet" type="text/css">
 
     <!-- Site Icon -->
     <link href="/res/ico/Tray_32.png" rel="shortcut icon">
 
     <!-- Scripts -->
-    <script src="../bootstrap/js/bootstrap.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../bootstrap/js/npm.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   </head>
 
   <div class="all">
@@ -29,30 +29,29 @@
     <!-- NavBar -->
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
-	<div class="navbar-header">
+	
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/index.php">
+            <img src="/res/ico/logo2.png">
+          </a>
+        </div>
 
-	  <!-- Logo -->
-	  <a class="logo" href="#" title="League Stats"><img src="../res/ico/logo2.png"></a>
+        <form class="navbar-form navbar-right" method="post" action="form.php">
+          <div class="form-group">
+	    
+	    <div class="btn-group" data-toggle="buttons">
+	      <label class="btn btn-primary active">
+		<input type="radio" name="region" value="euw" id="option1" autocomplete="off" checked> EUW
+	      </label>
+	      <label class="btn btn-primary">
+		<input type="radio" name="region" value="na" id="option2" autocomplete="off"> NA
+	      </label>
+	    </div>
 
-	  <!-- Form Summoner -->
-	  <div class="form1">
-	    <form class="navbar-form navbar-left" method="post" action="form.php">
-	      <!--<button title="Choose EUW" class="btn btn-default" type="submit">EUW</button>
-	    <button title="Choose NA" class="btn btn-default" type="submit">NA</button>-->
-
-	      <div class="btn-group" role="group" aria-label="...">
-		<button type="button" class="btn btn-default">EUW</button>
-		<button type="button" class="btn btn-default">NA</button>
-	      </div>
-
-              <div class="form-group">
-		<input type="text" class="form-control" name="player" placeholder="Search Summoner">
-              </div>
-              <button title="Get Stats" type="submit" class="btn btn-default">Go!</button>
-	    </form>
-	  </div>
-
-	</div>
+            <input type="text" class="form-control" name="player" placeholder="Search Summoner">
+            <button title="Get Stats" type="submit" class="btn btn-default">Go!</button>
+          </div>
+        </form>
       </div>
     </nav>
 
