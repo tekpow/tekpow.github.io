@@ -16,6 +16,7 @@
     <link href="php.css" rel="stylesheet" type="text/css">
     <link href="css/dropdown.css" rel="stylesheet" type="text/css">
     <link href="css/navbar.css" rel="stylesheet" type="text/css">
+    <link href="css/hugo.css" rel="stylesheet" type="text/css">
 
     <!-- Site Icon -->
     <link href="/res/ico/Tray_32.png" rel="shortcut icon">
