@@ -72,7 +72,13 @@
 	<div class="results">
 
 	  <!-- Results Tab -->
-	  <ul class="nav nav-tabs">
+	  <script>
+	    $('#myTab a').click(function (e) {
+	    e.preventDefault()
+	    $(this).tab('show')
+	    })
+	  </script>
+	  <ul class="nav nav-tabs" id="myTab">
 	    <li role="presentation"><a href="#">InGame</a></li>
 	    <li role="presentation"><a href="#">Profile</a></li>
 	  </ul>
