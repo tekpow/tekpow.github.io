@@ -66,9 +66,8 @@
     		<p class="text-center"> Enter a summoner name and we will fetch the stats for the Account</p>
         <p>
       <?php  
-      $region = 'euw';
-      $player = $_POST['player'];
-      $summId = 28954491;
+      $region = $_POST['region'];
+      $player = strtolower($_POST['player']);
       $api_key = '?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41';
 
       $v1_2 = 'https://' . $region . '.api.pvp.net/api/lol/' . $region . '/v1.2/';
@@ -77,6 +76,20 @@
       $v2_2 = 'https://' . $region . '.api.pvp.net/api/lol/' . $region . '/v2.2/';
       $v2_4 = 'https://' . $region . '.api.pvp.net/api/lol/' . $region . '/v2.4/';
       $v2_5 = 'https://' . $region . '.api.pvp.net/api/lol/' . $region . '/v2.5/';
+
+      switch ($region)
+      {
+        case 'euw':
+        $platformId = 'EUW1';
+        break;
+
+        case 'na':
+        $platformId = 'NA1';
+        break;
+
+        default:
+        break;
+      }
 
       function askApi($url)
       {
@@ -90,21 +103,29 @@
       function getSummonerId($v1_4, $player, $api_key)
       {
         $url = $v1_4 . 'summoner/by-name/' . $player . $api_key;
-        echo $url;
         $data = askApi($url);
-        echo $data;
+        $result = json_decode($data);
+        return $result->$player->id;
       }
 
-      function getMatchHistory($v2_2, $summId, $api_key)
+      function spectate($region, $platformId, $summId, $api_key)
       {
-        $url = $v2_2 . 'matchhistory/' . $summId . $api_key;
-        echo $url;
-        $data = askApi($url);
-        echo $data;
+        $data = askApi('https://' . $region . '.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/' . $platformId . '/' . $summId . $api_key);
+        $result = json_decode($data);
+        echo $result->gameType . "\n";
+        foreach ($result->participants as $name)
+        {
+          echo $name->summonerName . " ";
+          $champ_data = askApi('https://global.api.pvp.net/api/lol/static-data/' . $region . '/v1.2/champion/' . $name->championId . $api_key);
+          $champ = json_decode($champ_data);
+          echo $champ->name . "\n";
+        }
       }
 
-      getSummonerId($v1_4, $player, $api_key);
+      $summId = getSummonerId($v1_4, $player, $api_key);
+      spectate($region, $platformId, $summId, $api_key);
       
+
       ?>
         </p>
     		</span>
