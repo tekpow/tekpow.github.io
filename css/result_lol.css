@@ -4,3 +4,30 @@
     margin-right: 80px;
     height: 450px;
 }
+
+.centered-pills { text-align:center; }
+.centered-pills ul.nav-pills { display:inline-block; }
+.centered-pills li { display:inline; }
+.centered-pills a { float:left; }
+* html .centered-pills ul.nav-pills { display:inline; } /* IE6 */
+*+html .centered-pills ul.nav-pills { display:inline; } /* IE7 */
+
+.white {
+    color: #EEE;
+    font-size: 30px;
+}
+
+.tab-content {
+    color: #EEE;
+    margin-top: 35px;
+}
+
+.panel-primary > .panel-heading {
+  color: #EEE;
+  background-color: #230CF3;
+  border-color: #230CF3;
+}
+
+.panel-body {
+    background-color: #222;
+}

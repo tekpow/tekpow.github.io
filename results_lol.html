@@ -59,34 +59,102 @@
 
     <!-- Jumbotron -->
     <div class="jumbotron">
-      <span class="col-md-4">
-      </span>
-      <span class="col-md-4">
+      <div class="text-center">
 	<h1 class="text-center">LoL Scouter</h1>
 	<p class="text-center"> Enter a summoner name and we will fetch the stats for the Account</p>
-      </span>
-      <span class="col-md-4">
-      </span>
-      <br>
-      <div class="col-md-12">
-	<div class="results">
-
-	  <!-- Results Tab -->
-	  <script>
-	    $('#myTab a').click(function (e) {
-	    e.preventDefault()
-	    $(this).tab('show')
-	    })
-	  </script>
-	  <ul class="nav nav-tabs" id="myTab">
-	    <li role="presentation"><a href="#">InGame</a></li>
-	    <li role="presentation"><a href="#">Profile</a></li>
+      </div>
+      <div class="results">
+	
+	<!-- Results Pill -->
+	<script>
+	  $('#myPill a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+	  })
+	</script>
+	<div class="span12 centered-pills">
+	  <ul class="nav nav-pills" id="myPill">
+	    <li role="presentation"><a class="white" data-toggle="tab" href="#ingame">InGame</a></li>
+	    <li class="active" role="presentation"><a class="white" data-toggle="tab" href="#profile">Profile</a></li>
 	  </ul>
+	  <div class="tab-content">
+
+	    <div id="ingame" class="tab-pane fade">
+	      
+	      <div class="row">
+		<div class="col-sm-4">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Summary</h3>
+                    </div>
+                    <div class="panel-body">
+                      Panel content
+                    </div>
+		  </div>
+                </div>
+		<div class="col-sm-4">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Average Division</h3>
+                    </div>
+                    <div class="panel-body">
+                      Panel content
+                    </div>
+		  </div>
+                </div>
+		<div class="col-sm-4">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Bans</h3>
+                    </div>
+                    <div class="panel-body">
+                      Panel content
+                    </div>
+		  </div>
+                </div>
+              </div>  
+	    </div>
+	    
+	    <div id="profile" class="tab-pane fade in active">
+	      <div class="row">
+		<div class="col-sm-4">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Stats</h3>
+                    </div>
+                    <div class="panel-body">
+                      Panel content
+                    </div>
+		  </div>
+                </div>
+		<div class="col-sm-4">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Ranking</h3>
+                    </div>
+                    <div class="panel-body">
+                      Panel content
+                    </div>
+		  </div>
+                </div>
+		<div class="col-sm-4">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Other</h3>
+                    </div>
+                    <div class="panel-body">
+                      Panel content
+                    </div>
+		  </div>
+                </div>
+              </div>
+	    </div>
+	    
+	  </div>
 	</div>
       </div>
     </div>
-
-    <!-- Footer -->
-    <div class="footer">
+      <!-- Footer -->
+      <div class="footer">
+      </div>
     </div>
-  </div>
