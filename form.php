@@ -92,10 +92,10 @@
 
                         class player
                         {
-                          public summonerName;
-                          public champName;
-                          public summSpell1;
-                          public summSpell2;
+                          public $summonerName;
+                          public $champName;
+                          public $summSpell1;
+                          public $summSpell2;
                           //public team;
 
                           public function __construct($summonerName, $champName, $summSpell1, $summSpell2)
@@ -192,11 +192,22 @@
                               ${'player' . $i} = new player($name->summonerName, $champName, $summSpell1, $summSpell2);
                               $i += 1;
                             }
-                          }  
+                            return $i;
+                          }
                         }
 
                         $stats = new lolPow($_GET['region'], strtolower($_GET['player']), '?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41');
-                        $stats->spectate();
+                        $playerNbr = $stats->spectate();
+
+                        ?>
+                        <?php
+                        $i = 0;
+                        $halfPlayer = ($playerNbr / 2) - 1;
+                        while($i != $halfPlayer)
+                        {
+                          echo ${'player' . $i}->summonerName;
+                          $i++;
+                        }
 
                         ?>
                       </div>
