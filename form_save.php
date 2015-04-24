@@ -90,24 +90,6 @@
                       <div class="panel-body">
                         <?php
 
-                        class player
-                        {
-                          public summonerName;
-                          public champName;
-                          public summSpell1;
-                          public summSpell2;
-                          //public team;
-
-                          public function __construct($summonerName, $champName, $summSpell1, $summSpell2)
-                          {
-                            $this->summonerName = $summonerName;
-                            $this->champName = $champName;
-                            $this->summSpell1 = $summSpell1;
-                            $this->summSpell2 = $summSpell2;
-                            //$this->team = $team;
-                          }
-                        }
-
                         class lolPow
                         {
                           public $region;
@@ -175,22 +157,28 @@
 
                           public function spectate()
                           {
-                            $i = 0;
                             $url = $this->regionToSpectate();
                             $data = $this->askApi($url);
                             $result = json_decode($data);
                             foreach ($result->participants as $name)
                             {
+                              echo $name->summonerName . " - ";
                               $champ_data = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region . '/v1.2/champion/' . $name->championId . $this->api_key);
                               $champ = json_decode($champ_data);
-                              $champName = str_replace(" ", "", $champ->name);
-                              $champName = str_replace("'", "", $champName);
+                              $champ_name = str_replace(" ", "", $champ->name);
+                              $champ_name = str_replace("'", "", $champ_name);
+                              ?>
+                              <img src=<?php echo '/res/champions/' . $champ_name . '_Square_0.png'?> height="36" width"36">
+                              <?php
                               $summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell1Id . $this->api_key);
                               $summSpell1 = json_decode($summSpell);
                               $summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell2Id . $this->api_key);
                               $summSpell2 = json_decode($summSpell);
-                              ${'player' . $i} = new player($name->summonerName, $champName, $summSpell1, $summSpell2);
-                              $i += 1;
+                              ?>
+                              <img src=<?php echo '/res/summoner_spells/' . $summSpell1->name . '.png'?> height="18" width"18">
+                              <img src=<?php echo '/res/summoner_spells/' . $summSpell2->name . '.png'?> height="18" width"18">
+                              <br>
+                              <?php
                             }
                           }  
                         }
