@@ -112,13 +112,17 @@
       {
         $data = askApi('https://' . $region . '.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/' . $platformId . '/' . $summId . $api_key);
         $result = json_decode($data);
-        echo $result->gameType . "\n";
         foreach ($result->participants as $name)
         {
-          echo $name->summonerName . " ";
+          echo $name->summonerName . " - ";
           $champ_data = askApi('https://global.api.pvp.net/api/lol/static-data/' . $region . '/v1.2/champion/' . $name->championId . $api_key);
           $champ = json_decode($champ_data);
-          echo $champ->name . "\n";
+          echo $champ->name . " - ";
+          $summSpell = askApi('https://global.api.pvp.net/api/lol/static-data/' . $region .'/v1.2/summoner-spell/' . $name->spell1Id . $api_key);
+          $summSpell1 = json_decode($summSpell);
+          $summSpell = askApi('https://global.api.pvp.net/api/lol/static-data/' . $region .'/v1.2/summoner-spell/' . $name->spell2Id . $api_key);
+          $summSpell2 = json_decode($summSpell);
+          echo $summSpell1->name . " & " . $summSpell2->name . " / \n";
         }
       }
 
