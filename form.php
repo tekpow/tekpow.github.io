@@ -19,7 +19,7 @@
     <link href="css/hugo.css" rel="stylesheet" type="text/css">
 
     <!-- Site Icon -->
-    <link href="/res/ico/Tray_32.png" rel="shortcut icon">
+    <link href="res/ico/Tray_32.png" rel="shortcut icon">
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -38,7 +38,7 @@
           </a>
         </div>
 
-        <form class="navbar-form navbar-right" method="post" action="form.php">
+        <form class="navbar-form navbar-right" method="get" action="form.php">
           <div class="form-group">
 
             <div class="btn-group" data-toggle="buttons">
@@ -154,7 +154,9 @@
       TODO : Gérer les pseudos avec un espace
       */
 
-      $stats = new lolPow($_POST['region'], strtolower($_POST['player']), '?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41');
+      echo strtolower($_GET['player']);
+      
+      $stats = new lolPow($_GET['region'], strtolower($_GET['player']), '?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41');
       $stats->spectate();
       
       ?>
