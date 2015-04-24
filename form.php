@@ -84,6 +84,8 @@
         {
           $this->region = $region;
           $this->player = $player;
+          $this->player = str_replace(" ", "", $this->player);
+          $this->player = str_replace("%20", "", $this->player);
           $this->api_key = $api_key;
           $this->onetwo = 'https://' . $this->region . '.api.pvp.net/api/lol/' . $this->region . '/v1.2/';
           $this->onethree = 'https://' . $this->region . '.api.pvp.net/api/lol/' . $this->region . '/v1.3/';
@@ -140,12 +142,19 @@
             echo $name->summonerName . " - ";
             $champ_data = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region . '/v1.2/champion/' . $name->championId . $this->api_key);
             $champ = json_decode($champ_data);
-            echo $champ->name . " - ";
+            $champ_name = str_replace(" ", "", $champ->name);
+            $champ_name = str_replace("'", "", $champ_name);
+            ?>
+            <img src=<?php echo '/res/champions/' . $champ_name . '_Square_0.png'?>>
+            <?php
             $summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell1Id . $this->api_key);
             $summSpell1 = json_decode($summSpell);
             $summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell2Id . $this->api_key);
             $summSpell2 = json_decode($summSpell);
-            echo $summSpell1->name . " & " . $summSpell2->name . " / \n";
+            ?>
+            <img src=<?php echo '/res/summoner_spells/' . $summSpell1->name . '.png'?>>
+            <img src=<?php echo '/res/summoner_spells/' . $summSpell2->name . '.png'?>>
+            <?php
           }
         }  
       }
@@ -154,8 +163,6 @@
       TODO : Gérer les pseudos avec un espace
       */
 
-      echo strtolower($_GET['player']);
-      
       $stats = new lolPow($_GET['region'], strtolower($_GET['player']), '?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41');
       $stats->spectate();
       
