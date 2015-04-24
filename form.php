@@ -254,10 +254,6 @@
       }  
     }
 
-      /*
-      TODO : Gérer les pseudos avec un espace
-      */
-
       $stats = new lolPow($_GET['region'], strtolower($_GET['player']), '?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41');
       $stats->spectate();
       
