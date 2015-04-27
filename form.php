@@ -166,6 +166,7 @@
                         <?php
                         if ($stats->httpCode == 200)
                         {
+                          echo $stats->summonerName . "<br>";
                           echo 'Level ' . $stats->level . "<br>";
                         }
                         else
@@ -188,12 +189,16 @@
                           if ($stats->level == 30)
                           {
                             $elo = $stats->rank();
-                            if ($elo->httpCode == 200)
+                            if ($elo->httpCode == 200 && $stats->httpCode == 200)
                             {
                               echo $elo->leagueName . ' ' . $elo->leagueDiv . "<br>";
                               echo $elo->leaguePoint . 'LP' . "<br>";
                               echo 'Wins : ' . $elo->winSolo . "<br>";
                               echo 'Loses : ' . $elo->loseSolo . "<br>"; 
+                            }
+                            else if ($elo->httpCode != 200 && $stats->httpCode == 200)
+                            {
+                              echo 'Player never played ranked' . "<br>";
                             }
                             else
                             {

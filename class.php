@@ -43,6 +43,7 @@ class lolPow
 {
 	public $region;
 	public $player;
+	public $summonerName;
 	public $api_key;
 	public $onetwo;
 	public $onethree;
@@ -99,7 +100,8 @@ class lolPow
 		$result = json_decode($data);
 		$player = $this->player;
 		$this->summId = $result->$player->id;
-		$this->level = $result->$player->summonerLevel; 
+		$this->level = $result->$player->summonerLevel;
+		$this->summonerName = $result->$player->name;
 	}
 
 	public function regionToSpectate()
@@ -132,13 +134,13 @@ class lolPow
 		{
 			foreach ($result->participants as $name)
 			{
-				$champ_data = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region . '/v1.2/champion/' . $name->championId . $this->api_key);
+				$champ_data = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region . '/v1.2/champion/' . $name->championId . $this->api_key, NULL, NULL);
 				$champ = json_decode($champ_data);
 				$champName = str_replace(" ", "", $champ->name);
 				$champName = str_replace("'", "", $champName);
-				$summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell1Id . $this->api_key);
+				$summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell1Id . $this->api_key, NULL, NULL);
 				$summSpell1 = json_decode($summSpell);
-				$summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell2Id . $this->api_key);
+				$summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell2Id . $this->api_key, NULL, NULL);
 				$summSpell2 = json_decode($summSpell);
 				$player->infos($name->summonerName, $champName, $summSpell1->name, $summSpell2->name, $i);
 				$i += 1;
