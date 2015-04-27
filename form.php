@@ -95,15 +95,22 @@
                       <div class="panel-body">
                         <?php
                         $player = $stats->spectate();
-                        $i = 0;
-                        $halfPlayer = round($player->i / 2) - 1;
-                        while($i != ($halfPlayer + 1))
+                        if ($player->httpCode == 200)
                         {
-                          echo $player->summonerName[$i] . " ";
-                          echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';
-                          echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
-                          echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">' . "<br>";
-                          $i++;
+                          $i = 0;
+                          $halfPlayer = round($player->i / 2) - 1;
+                          while($i != ($halfPlayer + 1))
+                          {
+                            echo $player->summonerName[$i] . " ";
+                            echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';
+                            echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
+                            echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">' . "<br>";
+                            $i++;
+                          }
+                        }
+                        else
+                        {
+                          echo 'No active game' . "<br>";
                         }
                         ?>
                       </div>
@@ -115,7 +122,7 @@
                         <h3 class="panel-title">General Information</h3>
                       </div>
                       <div class="panel-body">
-                        Panel content
+                        Coming soon
                       </div>
                     </div>
                   </div>
@@ -126,13 +133,20 @@
                       </div>
                       <div class="panel-body">
                         <?php
-                        while($i != ($player->i + 1))
+                        if ($player->httpCode == 200)
                         {
-                          echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
-                          echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">';
-                          echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';
-                          echo " " . $player->summonerName[$i] . "<br>";
-                          $i++;
+                          while($i != ($player->i + 1))
+                          {
+                            echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
+                            echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">';
+                            echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';
+                            echo " " . $player->summonerName[$i] . "<br>";
+                            $i++;
+                          }
+                        }
+                        else
+                        {
+                          echo 'No active game' . "<br>";
                         }
                         ?>
                       </div>
@@ -149,7 +163,16 @@
                         <h3 class="panel-title">Stats</h3>
                       </div>
                       <div class="panel-body">
-                        Panel content
+                        <?php
+                        if ($stats->httpCode == 200)
+                        {
+                          echo 'Level ' . $stats->level . "<br>";
+                        }
+                        else
+                        {
+                          echo 'Player doesn\'t exist' . "<br>";
+                        }
+                        ?>
                       </div>
                     </div>
                   </div>
@@ -159,7 +182,36 @@
                         <h3 class="panel-title">Ranking</h3>
                       </div>
                       <div class="panel-body">
-                        Panel content
+                        <?php
+                        if ($stats->httpCode == 200)
+                        {
+                          if ($stats->level == 30)
+                          {
+                            $elo = $stats->rank();
+                            if ($elo->httpCode == 200)
+                            {
+                              echo $elo->leagueName . ' ' . $elo->leagueDiv . "<br>";
+                              echo $elo->leaguePoint . 'LP' . "<br>";
+                              echo 'Wins : ' . $elo->winSolo . "<br>";
+                              echo 'Loses : ' . $elo->loseSolo . "<br>"; 
+                            }
+                            else
+                            {
+                              echo 'Player doesn\'t exist' . "<br>";
+                            }
+                          }
+                          else
+                          {
+                            echo 'Player not level 30' . "<br>";
+                          }
+                        }
+                        else
+                        {
+                          echo 'Player doesn\'t exist' . "<br>";
+                        }
+
+                        
+                        ?>
                       </div>
                     </div>
                   </div>
@@ -169,7 +221,7 @@
                         <h3 class="panel-title">Other</h3>
                       </div>
                       <div class="panel-body">
-                        Panel content
+                        Coming soon
                       </div>
                     </div>
                   </div>
@@ -183,5 +235,6 @@
 
       <!-- Footer -->
       <div class="footer">
+        <p class="text-center"><font color="white">Website in development. If you want to see a new feature, report a bug or anything else, send us a message at : tekpow.contact@gmail.com</font></p>
       </div>
     </div>

@@ -7,6 +7,7 @@ class player
 	public $summSpell1 = array();
 	public $summSpell2 = array();
 	public $i;
+	public $httpCode;
     //public team;
 
 	public function infos($summonerName, $champName, $summSpell1, $summSpell2, $i)
@@ -16,6 +17,25 @@ class player
 		array_push($this->summSpell1, $summSpell1);
 		array_push($this->summSpell2, $summSpell2);
 		$this->i = $i;
+	}
+}
+
+class elo
+{
+	public $leagueName;
+	public $leagueDiv;
+	public $leaguePoint;
+	public $winSolo;
+	public $loseSolo;
+	public $httpCode;
+
+	public function __construct ($leagueName, $leagueDiv, $leaguePoint, $winSolo, $loseSolo)
+	{
+		$this->leagueName = $leagueName;
+		$this->leagueDiv = $leagueDiv;
+		$this->leaguePoint = $leaguePoint;
+		$this->winSolo = $winSolo;
+		$this->loseSolo = $loseSolo;
 	}
 }
 
@@ -31,6 +51,8 @@ class lolPow
 	public $twofour;
 	public $twofive;
 	public $summId;
+	public $level;
+	public $httpCode;
 
 	public function __construct($region, $player, $api_key)
 	{
@@ -47,27 +69,42 @@ class lolPow
 		$this->twofive = 'https://' . $this->region . '.api.pvp.net/api/lol/' . $this->region . '/v2.5/';
 	}
 
-	public function askApi($url)
+	public function askApi($url, $dest, $send)
 	{
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		$infos = curl_exec($ch);
+		if ($dest == "rank")
+		{
+			$send->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		}
+		else if($dest == "spec")
+		{
+			$send->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		}
+		else if ($dest == "summ")
+		{
+			$this->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		}
 		curl_close($ch);
 		return $infos;
 	}
 
-	public function getSummonerId()
+	public function getSummoner()
 	{
 		$url = $this->onefour . 'summoner/by-name/' . $this->player . $this->api_key;
-		$data = $this->askApi($url);
+		$data = $this->askApi($url, "summ", NULL);
 		$result = json_decode($data);
 		$player = $this->player;
 		$this->summId = $result->$player->id;
+		$this->level = $result->$player->summonerLevel; 
 	}
 
 	public function regionToSpectate()
 	{
-		$this->getSummonerId();
+		$this->getSummoner();
 		switch ($this->region)
 		{
 			case 'euw':
@@ -88,35 +125,39 @@ class lolPow
 	{
 		$i = 0;
 		$url = $this->regionToSpectate();
-		$data = $this->askApi($url);
-		$result = json_decode($data);
 		$player = new player();
-		foreach ($result->participants as $name)
+		$data = $this->askApi($url, "spec", $player);
+		$result = json_decode($data);
+		if ($player->httpCode == 200)
 		{
-			$champ_data = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region . '/v1.2/champion/' . $name->championId . $this->api_key);
-			$champ = json_decode($champ_data);
-			$champName = str_replace(" ", "", $champ->name);
-			$champName = str_replace("'", "", $champName);
-			$summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell1Id . $this->api_key);
-			$summSpell1 = json_decode($summSpell);
-			$summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell2Id . $this->api_key);
-			$summSpell2 = json_decode($summSpell);
-			$player->infos($name->summonerName, $champName, $summSpell1->name, $summSpell2->name, $i);
-			$i += 1;
+			foreach ($result->participants as $name)
+			{
+				$champ_data = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region . '/v1.2/champion/' . $name->championId . $this->api_key);
+				$champ = json_decode($champ_data);
+				$champName = str_replace(" ", "", $champ->name);
+				$champName = str_replace("'", "", $champName);
+				$summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell1Id . $this->api_key);
+				$summSpell1 = json_decode($summSpell);
+				$summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell2Id . $this->api_key);
+				$summSpell2 = json_decode($summSpell);
+				$player->infos($name->summonerName, $champName, $summSpell1->name, $summSpell2->name, $i);
+				$i += 1;
+			}
+			return $player;	
 		}
-		return $player;
 	}
-/*
+
 	public function rank()
 	{
-		$this->getSummonerId();
-		echo $this->twofive . 'league/by-summoner/' . $this->summId . '/entry' . $this->api_key;
-		$data = $this->askApi($this->twofive . 'league/by-summoner/' . $this->summId . '/entry' . $this->api_key);
-		$result = json_decode($data);
-		$summId = $this->summId;
-		var_dump($data);
+		$this->getSummoner();
+		$url = $this->twofive . 'league/by-summoner/' . $this->summId . '/entry' . $this->api_key;
+		$data = $this->askApi($url, NULL, NULL);
+		$result = json_decode($data, true);
+		$elo = new elo($result[$this->summId][0]['tier'], $result[$this->summId][0]['entries'][0]['division'], $result[$this->summId][0]['entries'][0]['leaguePoints'], $result[$this->summId][0]['entries'][0]['wins'], $result[$this->summId][0]['entries'][0]['losses']);
+		$data = $this->askApi($url, "rank", $elo);
+		return $elo;
 	}
-*/
+
 }
 
 ?>
