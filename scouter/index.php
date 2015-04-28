@@ -17,14 +17,14 @@
       <meta charset="utf-8" />
 
       <!-- Cascading Stylesheets -->
-      <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-      <link href="css/dropdown.css" rel="stylesheet" type="text/css">
-      <link href="css/navbar.css" rel="stylesheet" type="text/css">
-      <link href="css/hugo.css" rel="stylesheet" type="text/css">
+      <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+      <link href="../css/dropdown.css" rel="stylesheet" type="text/css">
+      <link href="../css/navbar.css" rel="stylesheet" type="text/css">
+      <link href="../css/hugo.css" rel="stylesheet" type="text/css">
       <link href="php.css" rel="stylesheet" type="text/css">
 
       <!-- Site Icon -->
-      <link href="res/ico/Tray_32.png" rel="shortcut icon">
+      <link href="../res/ico/Tray_32.png" rel="shortcut icon">
 
       <!-- Scripts -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -38,12 +38,12 @@
         <div class="container-fluid">
 
           <div class="navbar-header">
-            <a class="navbar-brand" href="file:///home/villev_h/HTML/website/hugo/my_website.html">
+            <a class="navbar-brand" href="../index.html">
               <img src="../res/ico/logo2.png">
             </a>
           </div>
 
-          <form class="navbar-form navbar-right" method="get" action="form.php">
+          <form class="navbar-form navbar-right" method="get" action="index.php">
             <div class="form-group">
 
               <div class="btn-group" data-toggle="buttons">
@@ -105,7 +105,7 @@
                             echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';
                             echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
                             echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">';
-                            echo $player->tier . $player->div . $player->leaguePoint . $player->win . $player->lose . "<br>";
+                            echo ' ' . $player->tier[$i] . ' ' . $player->div[$i] . ' ' . $player->leaguePoint[$i] . ' LP ' . round($player->win[$i] / ($player->win[$i] + $player->lose[$i]) * 100, 2) . ' % winrate' . "<br>";
                             $i++;
                           }
                         }
@@ -138,6 +138,7 @@
                         {
                           while($i != ($player->i + 1))
                           {
+                            echo $player->tier[$i] . ' ' . $player->div[$i] . ' ' . $player->leaguePoint[$i] . ' LP ' . round($player->win[$i] / ($player->win[$i] + $player->lose[$i]) * 100, 2) . ' % winrate';
                             echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
                             echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">';
                             echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';
