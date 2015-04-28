@@ -105,7 +105,7 @@
                             echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';
                             echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
                             echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">';
-                            echo ' ' . $player->tier[$i] . ' ' . $player->div[$i] . ' ' . $player->leaguePoint[$i] . ' LP ' . round($player->win[$i] / ($player->win[$i] + $player->lose[$i]) * 100, 2) . ' % winrate' . "<br>";
+                            echo $player->tier . $player->div . $player->leaguePoint . $player->win . $player->lose . "<br>";
                             $i++;
                           }
                         }
@@ -138,7 +138,6 @@
                         {
                           while($i != ($player->i + 1))
                           {
-                            echo $player->tier[$i] . ' ' . $player->div[$i] . ' ' . $player->leaguePoint[$i] . ' LP ' . round($player->win[$i] / ($player->win[$i] + $player->lose[$i]) * 100, 2) . ' % winrate';
                             echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
                             echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">';
                             echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';

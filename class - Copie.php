@@ -6,56 +6,17 @@ class player
 	public $champName = array();
 	public $summSpell1 = array();
 	public $summSpell2 = array();
-	public $tier = array();
-	public $div = array();
-	public $leaguePoint = array();
-	public $win = array();
-	public $lose = array();
 	public $i;
 	public $httpCode;
-	public $region;
-	public $api_key = '?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41';
     //public team;
 
-	public function askApi($url)
-	{
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-		$infos = curl_exec($ch);
-		curl_close($ch);
-		return $infos;
-	}
-
-	public function getSummonerId($player)
-	{
-		$player = strtolower($player);
-		$player = str_replace(" ", "", $player);
-		$player = str_replace("%20", "", $player);
-		$url = 'https://' . $this->region . '.api.pvp.net/api/lol/' . $this->region . '/v1.4/summoner/by-name/' . $player . $this->api_key;
-		$data = $this->askApi($url);
-		$result = json_decode($data);
-		return $result->$player->id;
-	}
-
-	public function infos($summonerName, $champName, $summSpell1, $summSpell2, $i, $region)
+	public function infos($summonerName, $champName, $summSpell1, $summSpell2, $i)
 	{
 		array_push($this->summonerName, $summonerName);
 		array_push($this->champName, $champName);
 		array_push($this->summSpell1, $summSpell1);
 		array_push($this->summSpell2, $summSpell2);
-		$this->region = $region; 
 		$this->i = $i;
-		$summId = $this->getSummonerId($this->summonerName[$i]);
-		$url = 'https://' . $this->region . '.api.pvp.net/api/lol/' . $this->region . '/v2.5/league/by-summoner/' . $summId . '/entry' . $this->api_key;
-		$data = $this->askApi($url);
-		$result = json_decode($data, true);
-		array_push($this->tier, $result[$summId][0]['tier']);
-		array_push($this->div, $result[$summId][0]['entries'][0]['division']);
-		array_push($this->leaguePoint, $result[$summId][0]['entries'][0]['leaguePoints']);
-		array_push($this->win, $result[$summId][0]['entries'][0]['wins']);
-		array_push($this->lose, $result[$summId][0]['entries'][0]['losses']);
 	}
 }
 
@@ -181,7 +142,7 @@ class lolPow
 				$summSpell1 = json_decode($summSpell);
 				$summSpell = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region .'/v1.2/summoner-spell/' . $name->spell2Id . $this->api_key, NULL, NULL);
 				$summSpell2 = json_decode($summSpell);
-				$player->infos($name->summonerName, $champName, $summSpell1->name, $summSpell2->name, $i, $this->region);
+				$player->infos($name->summonerName, $champName, $summSpell1->name, $summSpell2->name, $i);
 				$i += 1;
 			}
 			return $player;	
