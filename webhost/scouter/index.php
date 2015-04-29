@@ -93,7 +93,30 @@
                         <h3 class="panel-title">Red Team</h3>
                       </div>
                       <div class="panel-body">
-                        Coming soon
+                        <?php
+                        $player = $stats->spectate();
+                        if ($player->httpCode == 200)
+                        {
+                          $i = 0;
+                          $halfPlayer = round($player->i / 2) - 1;
+                          while($i != ($halfPlayer + 1))
+                          {
+                            echo $player->summonerName[$i] . " ";
+                            echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';
+                            echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
+                            echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">';
+                            if ($player->http[$i] == 200)
+                              echo ' ' . $player->tier[$i] . ' ' . $player->div[$i] . ' ' . $player->leaguePoint[$i] . ' LP ' . round($player->win[$i] / ($player->win[$i] + $player->lose[$i]) * 100, 2) . ' % winrate' . "<br>";
+                            else
+                              echo ' UNRANKED' . "<br>";
+                            $i++;
+                          }
+                        }
+                        else
+                        {
+                          echo 'No active game' . "<br>";
+                        }
+                        ?>
                       </div>
                     </div>
                   </div>
@@ -113,7 +136,27 @@
                         <h3 class="panel-title">Blue Team</h3>
                       </div>
                       <div class="panel-body">
-                        Coming soon
+                        <?php
+                        if ($player->httpCode == 200)
+                        {
+                          while($i != ($player->i + 1))
+                          {
+                            if ($player->http[$i] == 200)
+                              echo $player->tier[$i] . ' ' . $player->div[$i] . ' ' . $player->leaguePoint[$i] . ' LP ' . round($player->win[$i] / ($player->win[$i] + $player->lose[$i]) * 100, 2) . ' % winrate ';
+                            else
+                              echo 'UNRANKED ';
+                            echo '<img src="/res/summoner_spells/' . $player->summSpell1[$i] . '.png" height="18" width="18">';
+                            echo '<img src="/res/summoner_spells/' . $player->summSpell2[$i] . '.png" height="18" width="18">';
+                            echo '<img src="/res/champions/' . $player->champName[$i] . '_Square_0.png" height="36" width="36">';
+                            echo " " . $player->summonerName[$i] . "<br>";
+                            $i++;
+                          }
+                        }
+                        else
+                        {
+                          echo 'No active game' . "<br>";
+                        }
+                        ?>
                       </div>
                     </div>
                   </div>
@@ -157,7 +200,7 @@
                             if ($elo->httpCode == 200 && $stats->httpCode == 200)
                             {
                               echo $elo->leagueName . ' ' . $elo->leagueDiv . "<br>";
-                              echo $elo->leaguePoint . ' LP' . "<br>";
+                              echo $elo->leaguePoint . 'LP' . "<br>";
                               echo 'Wins : ' . $elo->winSolo . "<br>";
                               echo 'Loses : ' . $elo->loseSolo . "<br>"; 
                             }
