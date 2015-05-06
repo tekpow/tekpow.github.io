@@ -96,6 +96,11 @@ class lolPow
 	public $summId;
 	public $level;
 	public $httpCode;
+	public $httpCode_spec;
+	public $httpCode_static;
+	public $i;
+	public $champ_array = array();
+	public $ss_array = array();
 
 	public function __construct($region, $player, $api_key)
 	{
@@ -110,6 +115,8 @@ class lolPow
 		$this->twotwo = 'https://' . $this->region . '.api.pvp.net/api/lol/' . $this->region . '/v2.2/';
 		$this->twofour = 'https://' . $this->region . '.api.pvp.net/api/lol/' . $this->region . '/v2.4/';
 		$this->twofive = 'https://' . $this->region . '.api.pvp.net/api/lol/' . $this->region . '/v2.5/';
+		$this->i = 0;
+		static_data();
 	}
 
 	public function askApi($url, $dest, $send)
@@ -125,14 +132,31 @@ class lolPow
 		}
 		else if($dest == "spec")
 		{
-			$send->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			$this->httpCode_spec = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		}
 		else if ($dest == "summ")
 		{
 			$this->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		}
+		else if ($dest == "static_data")
+		{
+			$this->httpCode_static = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		}
 		curl_close($ch);
 		return $infos;
+	}
+
+	public function static_data()
+	{
+		$url = 'https://global.api.pvp.net/api/lol/static-data/euw/v1.2/champion?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41';
+		$data_champ = $this->askApi($url, "static_data", NULL);
+		foreach ($data_champ->data as $champ_name)
+			array_push($champ_array, array($champ_name->id, $champ_name->key));
+
+		$url = 'https://global.api.pvp.net/api/lol/static-data/euw/v1.2/summoner-spell?api_key=c54b731a-fac6-4355-b11b-2c5ee40bea41';
+		$data_ss = $this->askApi($url, "static_data", NULL);
+		foreach ($data_ss->data as $ss)
+			array_push($ss_array, array($ss->id, $ss->name));
 	}
 
 	public function getSummoner()
@@ -167,13 +191,14 @@ class lolPow
 
 	public function spectate()
 	{
-		$i = 0;
 		$url = $this->regionToSpectate();
-		$player = new player();
-		$data = $this->askApi($url, "spec", $player);
+		//$player = new player();
+		$data = $this->askApi($url, "spec", NULL);
 		$result = json_decode($data);
-		if ($player->httpCode == 200)
+
+		if ($this->httpCode_spec == 200)
 		{
+			/*
 			foreach ($result->participants as $name)
 			{
 				$champ_data = $this->askApi('https://global.api.pvp.net/api/lol/static-data/' . $this->region . '/v1.2/champion/' . $name->championId . $this->api_key, NULL, NULL);
@@ -187,7 +212,13 @@ class lolPow
 				$player->infos($name->summonerName, $champName, $summSpell1->name, $summSpell2->name, $i, $this->region);
 				$i += 1;
 			}
-			return $player;	
+			return $player;
+			*/
+			foreach ($result->participants as $name)
+			{
+				echo $name->summonerName;
+			}
+			return $variable = array();
 		}
 	}
 
@@ -197,7 +228,13 @@ class lolPow
 		$url = $this->twofive . 'league/by-summoner/' . $this->summId . '/entry' . $this->api_key;
 		$data = $this->askApi($url, NULL, NULL);
 		$result = json_decode($data, true);
-		$elo = new elo($result[$this->summId][0]['tier'], $result[$this->summId][0]['entries'][0]['division'], $result[$this->summId][0]['entries'][0]['leaguePoints'], $result[$this->summId][0]['entries'][0]['wins'], $result[$this->summId][0]['entries'][0]['losses']);
+		$elo = new elo(
+			$result[$this->summId][0]['tier'], 
+			$result[$this->summId][0]['entries'][0]['division'], 
+			$result[$this->summId][0]['entries'][0]['leaguePoints'], 
+			$result[$this->summId][0]['entries'][0]['wins'], 
+			$result[$this->summId][0]['entries'][0]['losses']
+			);
 		$data = $this->askApi($url, "rank", $elo);
 		return $elo;
 	}

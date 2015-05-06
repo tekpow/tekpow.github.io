@@ -90,30 +90,10 @@
                   <div class="col-sm-4">
                     <div class="panel panel-primary">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Blue Team</h3>
+                        <h3 class="panel-title">Red Team</h3>
                       </div>
                       <div class="panel-body">
-                        <?php
-                        $variable = $stats->spectate();
-                        if ($stats->httpCode_spec == 200)
-                        {
-                          $i = 0;
-                          $halfPlayer = round($stats->i / 2) - 1;
-                          while($i != ($halfPlayer + 1))
-                          {
-                            echo $variable[$i][0] . " ";
-                            echo '<img src="/res/champions/' . $variable[$i][1] . '_Square_0.png" height="36" width="36">';
-                            echo '<img src="/res/summoner_spells/' . $variable[$i][2] . '.png" height="18" width="18">';
-                            echo '<img src="/res/summoner_spells/' . $variable[$i][3] . '.png" height="18" width="18">';
-                            echo "<br>";
-                            $i++;
-                          }
-                        }
-                        else
-                        {
-                          echo 'No active game' . "<br>";
-                        }
-                        ?>
+                        Coming soon
                       </div>
                     </div>
                   </div>
@@ -123,54 +103,17 @@
                         <h3 class="panel-title">General Information</h3>
                       </div>
                       <div class="panel-body">
-                        <?php
-                        if ($stats->httpCode_spec == 200)
-                        {
-                          echo 'Blue team bans : <br>';
-                          foreach ($stats->bans as $bans)
-                          {
-                            if ($bans[0] == 0)
-                              echo '<img src="/res/champions/' . $bans[1] . '_Square_0.png" height="36" width="36">';
-                          }
-                          echo '<br>Red team bans : <br>';
-                          foreach ($stats->bans as $bans)
-                          {
-                            if ($bans[0] == 1)
-                              echo '<img src="/res/champions/' . $bans[1] . '_Square_0.png" height="36" width="36">';
-                          }
-                        }
-                        else
-                        {
-                          echo 'No active game' . "<br>";
-                        }
-                        ?>
+                        Coming soon
                       </div>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="panel panel-primary">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Red Team</h3>
+                        <h3 class="panel-title">Blue Team</h3>
                       </div>
                       <div class="panel-body">
-                        <?php
-                        if ($stats->httpCode_spec == 200)
-                        {
-                          while($i != $stats->i)
-                          {
-                            echo $variable[$i][0] . " ";
-                            echo '<img src="/res/champions/' . $variable[$i][1] . '_Square_0.png" height="36" width="36">';
-                            echo '<img src="/res/summoner_spells/' . $variable[$i][2] . '.png" height="18" width="18">';
-                            echo '<img src="/res/summoner_spells/' . $variable[$i][3] . '.png" height="18" width="18">';
-                            echo "<br>";
-                            $i++;
-                          }
-                        }
-                        else
-                        {
-                          echo 'No active game' . "<br>";
-                        }
-                        ?>
+                        Coming soon
                       </div>
                     </div>
                   </div>
@@ -214,7 +157,7 @@
                             if ($elo->httpCode == 200 && $stats->httpCode == 200)
                             {
                               echo $elo->leagueName . ' ' . $elo->leagueDiv . "<br>";
-                              echo $elo->leaguePoint . 'LP' . "<br>";
+                              echo $elo->leaguePoint . ' LP' . "<br>";
                               echo 'Wins : ' . $elo->winSolo . "<br>";
                               echo 'Loses : ' . $elo->loseSolo . "<br>"; 
                             }
