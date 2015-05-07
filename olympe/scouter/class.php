@@ -37,6 +37,7 @@ class lolPow
 	public $httpCode_spec;
 	public $httpCode_static;
 	public $i;
+	public $gameTypeId;
 	public $champ_array = array();
 	public $ss_array = array();
 	public $variable = array();
@@ -138,6 +139,7 @@ class lolPow
 		if ($this->httpCode_spec == 200)
 		{
 			$this->static_data();
+			$this->gameTypeId = $result->gameQueueConfigId;
 			foreach ($result->bannedChampions as $ban)
 			{
 				if ($ban->teamId == 100)
@@ -149,7 +151,7 @@ class lolPow
 					}
 					array_push($this->bans, array(0, $champ));
 				}
-				if ($ban->teamId == 200)
+				else if ($ban->teamId == 200)
 				{
 					foreach ($this->champ_array as $champ_name) 
 					{

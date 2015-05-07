@@ -111,7 +111,7 @@
                         }
                         else
                         {
-                          echo 'No active game' . "<br>";
+                          echo 'No active game <br>';
                         }
                         ?>
                       </div>
@@ -126,22 +126,29 @@
                         <?php
                         if ($stats->httpCode_spec == 200)
                         {
-                          echo 'Blue team bans : <br>';
-                          foreach ($stats->bans as $bans)
+                          if ($stats->gameTypeId == 4)
                           {
-                            if ($bans[0] == 0)
-                              echo '<img src="/res/champions/' . $bans[1] . '_Square_0.png" height="36" width="36">';
+                            echo 'Blue team bans : <br>';
+                            foreach ($stats->bans as $bans)
+                            {
+                              if ($bans[0] == 0)
+                                echo '<img src="/res/champions/' . $bans[1] . '_Square_0.png" height="36" width="36">';
+                            }
+                            echo '<br>Red team bans : <br>';
+                            foreach ($stats->bans as $bans)
+                            {
+                              if ($bans[0] == 1)
+                                echo '<img src="/res/champions/' . $bans[1] . '_Square_0.png" height="36" width="36">';
+                            }
                           }
-                          echo '<br>Red team bans : <br>';
-                          foreach ($stats->bans as $bans)
+                          else
                           {
-                            if ($bans[0] == 1)
-                              echo '<img src="/res/champions/' . $bans[1] . '_Square_0.png" height="36" width="36">';
+                            echo 'Unranked game <br>';
                           }
                         }
                         else
                         {
-                          echo 'No active game' . "<br>";
+                          echo 'No active game <br>';
                         }
                         ?>
                       </div>
@@ -168,7 +175,7 @@
                         }
                         else
                         {
-                          echo 'No active game' . "<br>";
+                          echo 'No active game <br>';
                         }
                         ?>
                       </div>
@@ -193,7 +200,7 @@
                         }
                         else
                         {
-                          echo 'Player doesn\'t exist' . "<br>";
+                          echo 'Player doesn\'t exist <br>';
                         }
                         ?>
                       </div>
@@ -220,21 +227,21 @@
                             }
                             else if ($elo->httpCode != 200 && $stats->httpCode == 200)
                             {
-                              echo 'Player never played ranked' . "<br>";
+                              echo 'Player never played ranked <br>';
                             }
                             else
                             {
-                              echo 'Player doesn\'t exist' . "<br>";
+                              echo 'Player doesn\'t exist <br>';
                             }
                           }
                           else
                           {
-                            echo 'Player not level 30' . "<br>";
+                            echo 'Player not level 30 <br>';
                           }
                         }
                         else
                         {
-                          echo 'Player doesn\'t exist' . "<br>";
+                          echo 'Player doesn\'t exist <br>';
                         }
 
                         
