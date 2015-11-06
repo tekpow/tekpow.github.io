@@ -4,7 +4,8 @@ var pill = "<ul class=\"nav nav-pills nav-center\" id=\"myPill\"><li role\"><a c
     function get_data() {
         var region = "";
         var summoner_name = "";
-
+		var url = "";
+		
         if (!$("#euselector").hasClass("active")) {
             region = "NA";
         }
@@ -12,33 +13,43 @@ var pill = "<ul class=\"nav nav-pills nav-center\" id=\"myPill\"><li role\"><a c
             region = "EU";
         }
         summoner_name = $('#summonername').val();
-        append_data(region, summoner_name);
+		
+		url = getUrlFromRegion(region, summoner_name);
+		if (url == null)
+		{
+			alert("No summoner name specified");
+			return ;
+		}
+		append_data(url);
     }
 
-    function append_data(region, summoner_name) {
-        if (summoner_name == "") {
-            console.log("no summoner name speicfied");
-        }
-        else {
-            if (region == "NA") {
-                $.ajax({
-                    url: 'https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + summoner_name + '?api_key=' + api_key,
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {
+	function getUrlFromRegion(region, summoner_name)
+	{
+		if (summoner_name == "")
+			return ;
+		
+		if (region == "EU")
+			return ('https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/by-name/' + summoner_name + '?api_key=' + api_key);
+		else
+			return ('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + summoner_name + '?api_key=' + api_key);
+	}
+	
+    function append_data(url) {
+		$.ajax({
+			url: url,
+			type: 'GET',
+			dataType: 'json',
+			data: {
 
-                    },
-                    success: function (json) {
-                        $("#results").html(pill);
-                        console.log(json);
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        alert("error getting Summoner data!");
-                    }
-                });
-            }
-            else if (region == "EU") {
-                console.log("bientot :p");
-            }
-        }
+			},
+			success: function (json) {
+				$("#results").html(pill);
+				console.log(json);
+				alert(json["theskorpiox"]["name"] + " is level " + json["theskorpiox"]["summonerLevel"]);
+				
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				alert("error getting Summoner data!");
+			}
+		});
     }
