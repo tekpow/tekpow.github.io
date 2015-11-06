@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 
 <!--   /\  /\_   _  __ _  ___     /\/\   __ _ _ __ ___ ___  __ _ _   _                                
       / /_/ / | | |/ _` |/ _ \   /    \ / _` | '__/ __/ _ \/ _` | | | |                               
@@ -6,8 +6,8 @@
      \/ /_/  \__,_|\__, |\___/  \/    \/\__,_|_|  \___\___|\__,_|\__,_|                               
                    |___/                                                 -->
 
+<title>LolPow</title>
 <html lang="en">
-  <title>LolPow</title>
   <head>
     <meta charset="utf-8" />
 
@@ -19,13 +19,9 @@
 
     <!-- Site Icon -->
     <link href="res/ico/Tray_32.png" rel="shortcut icon">
-
-    <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   </head>
 
-  <div class="all">
+  <body class="all">
 
     <!-- NavBar -->
     <nav class="navbar navbar-inverse">
@@ -37,20 +33,19 @@
           </a>
         </div>
 
-        <form class="navbar-form navbar-right" method="get" action="scouter/index.php">
-          <div class="form-group">
+        <form class="navbar-form navbar-right">
+        <div class="form-group">
 	    
 	    <div class="btn-group" data-toggle="buttons">
-	      <label class="btn btn-primary active">
-		<input type="radio" name="region" value="euw" id="option1" autocomplete="off" checked> EUW
+	      <label id="euselector" class="btn btn-primary active">
+		<input type="radio" name="region" value="euw" id="option1" autocomplete="off"> EUW
 	      </label>
-	      <label class="btn btn-primary">
+	      <label id="naselector" class="btn btn-primary">
 		<input type="radio" name="region" value="na" id="option2" autocomplete="off"> NA
 	      </label>
 	    </div>
-
-            <input type="text" class="form-control" name="player" placeholder="Search Summoner">
-            <button title="Get Stats" type="submit" class="btn btn-default">Go!</button>
+            <input id="summonername" type="text" class="form-control" name="player" placeholder="Search Summoner">
+            <div onclick="get_data()" class="btn btn-default">Go!</div>
           </div>
         </form>
       </div>
@@ -60,8 +55,8 @@
     <div class="jumbotron">
       <div class="text-center">
 	<h1 class="text-center">LoL Scouter</h1>
-	<p class="text-center"> Enter a summoner name and we will fetch the stats for the Account</p>
-      </div>
+          <div id="results"></div>
+    </div>
     </div>
 
     <!-- Footer -->
@@ -69,7 +64,14 @@
       <div class="col-md-4">
         <a class="about" href="about/index.html"><p class="text-center">About</p></a>
       </div>
-      <div class="col-md-8"
+      <div class="col-md-8">
       <p class="text-center"><font color="white">Website in development. If you want to see a new feature, report a bug or anything else, send us a message at : tekpow.contact@gmail.com</font></p>
     </div>
-  </div>
+    </div>
+
+      <!-- Scripts -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      <script src="js/scouter.js"></script>
+    </body>
+  </html>

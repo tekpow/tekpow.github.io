@@ -44,7 +44,7 @@
 
 @font-face {
     font-family: 'Exo';
-    src: url('http://tekpow.olympe.in/res/fonts/exo/Exo-Regular.otf');
+    src: url('../res/fonts/exo/Exo-Black.otf');
 }
 
 .form1 {
@@ -62,4 +62,8 @@
     position: absolute;
     top: 7px;
     right: 450px;
+}
+
+#results {
+    padding-left: 45%;
 }
