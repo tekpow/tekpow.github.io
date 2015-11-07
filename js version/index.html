@@ -36,14 +36,11 @@
         <form class="navbar-form navbar-right">
         <div class="form-group">
 	    
-	    <div class="btn-group" data-toggle="buttons">
-	      <label id="euselector" class="btn btn-primary active">
-		<input type="radio" name="region" value="euw" id="option1" autocomplete="off"> EUW
-	      </label>
-	      <label id="naselector" class="btn btn-primary">
-		<input type="radio" name="region" value="na" id="option2" autocomplete="off"> NA
-	      </label>
-	    </div>
+          <select id="regionSelector" class="form-control">
+            <option value="euw">EUW</option>
+            <option value="na">NA</option>
+          </select>
+
             <input id="summonername" type="text" class="form-control" name="player" placeholder="Search Summoner">
             <div onclick="get_data()" class="btn btn-default">Go!</div>
           </div>

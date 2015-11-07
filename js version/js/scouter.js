@@ -6,13 +6,10 @@ var summoner_name;
 
 function get_data()
 {
-	if (!$("#euselector").hasClass("active")) {
-        region = "na";
-    }
-    else if (!$("#naselector").hasClass("active")) {
-        region = "euw";
-    }
+    var e = document.getElementById("regionSelector");
+    region = e.options[e.selectedIndex].value;
 	
+	console.log(region);
 	// Récupère le nom en minuscule et sans espace (pour fonctionner avec l'api)
     summoner_name = $('#summonername').val().toLowerCase().replace(/\s/g, '');
 	
