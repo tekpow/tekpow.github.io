@@ -12,7 +12,9 @@ function get_data()
     else if (!$("#naselector").hasClass("active")) {
         region = "euw";
     }
-    summoner_name = $('#summonername').val();
+	
+	// Récupère le nom en minuscule et sans espace (pour fonctionner avec l'api)
+    summoner_name = $('#summonername').val().toLowerCase().replace(/\s/g, '');
 	
 	if (summoner_name == "")
 	{
